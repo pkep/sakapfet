@@ -34,6 +34,7 @@ build/
 
 # Frontend
 frontend/node_modules/
+frontend/.angular
 frontend/dist
 frontend/tmp
 frontend/out-tsc
