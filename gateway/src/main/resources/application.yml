@@ -1,0 +1,60 @@
+logging:
+    file:
+        name: ${java.io.tmpdir}/log/sakapfet/app.log
+    level:
+        com:
+            kp2s: error
+        org:
+            hibernate: error
+            springframework:
+                web: debug
+    pattern:
+        console: '%d{yyyy-MM-dd HH:mm:ss} - %msg%n'
+        file: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%'
+management:
+    endpoints:
+        web:
+            exposure:
+                include: '*'
+server:
+    baseurl: http://kp2s.com
+    servlet:
+        context-path: /api-gateway/
+spring:
+    cloud:
+        zookeeper:
+            connect-string: localhost:22181
+    config:
+        import: 'optional:zookeeper:'
+    data:
+        elasticsearch:
+            client:
+                reactive:
+                    endpoints: 192.168.99.100:9200
+    elasticsearch:
+        uris: http://192.168.99.100:9200
+    kafka:
+        consumer:
+            auto-offset-reset: earliest
+            bootstrap-servers: localhost:9092
+            group-id: group_id
+            key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        producer:
+            bootstrap-servers: localhost:9092
+            key-serializer: org.apache.kafka.common.serialization.StringSerializer
+            value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    profiles:
+        active: dev
+    r2dbc:
+        url: r2dbc:postgresql://localhost:5432/develop
+        username: sakapfet
+        password: sak@pfet
+        pool:
+            initialSize: 1
+            max-idle-time: 3m
+            maxSize: 2
+springbootwebfluxjjwt:
+    jjwt:
+        expiration: 28800
+        secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
